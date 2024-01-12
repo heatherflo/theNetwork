@@ -2,22 +2,32 @@
   <div class="container-fluid">
     <section class="row">
       <div class="col-3">
-        <ProfileBar />
+        <AccountBar />
+      </div>
+      <div class="col-9">
+        <PostsBar />
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import ProfileBar from '../components/ProfileBar.vue'
+import { computed } from 'vue';
+import { AppState } from '../AppState';
+import AccountBar from '../components/AccountBar.vue';
+import PostsBar from '../components/PostsBar.vue';
 
 export default {
   setup() {
+
+
+
     return {
+      account: computed(() => AppState.account)
 
     }
   },
-  components: { ProfileBar }
+  components: { AccountBar, PostsBar }
 }
 </script>
 

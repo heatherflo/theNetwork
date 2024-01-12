@@ -1,12 +1,15 @@
-export class Account {
+
+
+class Profile {
   constructor(data) {
     this.id = data.id
-    this.email = data.email
     this.name = data.name
     this.picture = data.picture
-    this.github = data.github
+    this.bio = data.bio
     this.graduated = data.graduated
+    this.github = data.github
     this.linkedin = data.linkedin
-    // TODO add additional properties if needed
+    this.resume = data.resume
+
   }
 }
