@@ -6,8 +6,12 @@
       <div class="col-2">
         <img class="profile-pic mt-2" :src="post.creator.picture" :alt="post.creator.name">
       </div>
+      <div class="col-2">
+        {{ post.creator.name }}
+      </div>
+      <div> {{ post.createdAt }}</div>
       <div v-if="account" class="col-2">
-        <i selectable @click="" class="fs-3 mdi mdi-heart-outline">{{ post.likes.length }}</i>
+        <i role="button" @click="clickLike()" class="fs-3 mdi mdi-heart-outline">{{ post.likes.length }}</i>
       </div>
       <div v-else>
         <i class="fs-3 mdi mdi-heart-outline">{{ post.likes.length }}</i>
@@ -27,6 +31,12 @@ import { postsService } from '../services/PostsService';
 
 export default {
   setup() {
+    let likes = 0
+
+    function clickLike() {
+
+    }
+
     onMounted(() => {
       getPosts()
     })
@@ -37,9 +47,11 @@ export default {
         Pop.error(error)
       }
 
+
     }
     return {
       getPosts,
+      clickLike,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account)
 
@@ -52,7 +64,12 @@ export default {
 <style lang="scss" scoped>
 .profile-pic {
   height: 5vh;
-  object-fit: cover;
+  object-fit: auto;
   border-radius: 50%;
+}
+
+.img {
+  max-height: 100px;
+  object-fit: center;
 }
 </style>

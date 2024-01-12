@@ -4,8 +4,11 @@
       <div class="col-3">
         <AccountBar />
       </div>
-      <div class="col-9">
+      <div class="col-6">
         <PostsBar />
+      </div>
+      <div class="col-2">
+        <AdsBar />
       </div>
     </section>
   </div>
