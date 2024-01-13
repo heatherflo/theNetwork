@@ -1,6 +1,6 @@
 <template>
   <div class="AccountBar sticky-top">
-    <div v-if="account">
+    <div v-if="account.id">
       <p>
         hello {{ account.name }}
       </p>

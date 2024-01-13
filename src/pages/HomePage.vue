@@ -37,7 +37,7 @@ export default {
 
     async function changePage(pageNumber) {
       try {
-        await postsService.changePage(`posts?page=${pageNumber}`)
+        await postsService.changePage(`api/posts?page=${pageNumber}`)
       } catch (error) {
         Pop.error(error)
       }

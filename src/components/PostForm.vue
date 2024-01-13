@@ -1,7 +1,7 @@
 <template>
   <div class="PostForm">
-    <div class="shadow rounded p-2">
-      <form @submit.prevent="createPost()" class=" ">
+    <div class="shadow rounded p-2" v-if="account.id">
+      <form @submit.prevent="createPost()">
         <p class="mb-2">Create a post</p>
         <div class="input-group ">
           <label for="post-picture"></label>
@@ -41,7 +41,8 @@ export default {
     }
     return {
       createPost,
-      postData
+      postData,
+      account: computed(() => AppState.account)
     }
   }
 };
