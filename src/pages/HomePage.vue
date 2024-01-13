@@ -19,6 +19,7 @@ import { computed } from 'vue';
 import { AppState } from '../AppState';
 import AccountBar from '../components/AccountBar.vue';
 import PostsBar from '../components/PostsBar.vue';
+import AdsBar from '../components/AdsBar.vue';
 
 export default {
   setup() {
@@ -30,7 +31,7 @@ export default {
 
     }
   },
-  components: { AccountBar, PostsBar }
+  components: { AccountBar, PostsBar, AdsBar }
 }
 </script>
 
