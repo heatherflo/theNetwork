@@ -9,7 +9,7 @@
       <div class="col-2">
         {{ post.creator.name }}
       </div>
-      <div> {{ getDate }}</div>
+      <div> {{ }}</div>
       <div v-if="account" class="col-2">
         <i role="button" @click="post.likes.length++" class="fs-3 mdi mdi-heart-outline"></i>
         <i role="button" @click="post.likes.length--" class="fs-3 mdi mdi-emoticon-sad-outline"></i>
@@ -27,7 +27,7 @@
 
 <script>
 import { AppState } from '../AppState';
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, onUpdated } from 'vue';
 import Pop from '../utils/Pop';
 import { postsService } from '../services/PostsService';
 
@@ -45,19 +45,15 @@ export default {
       } catch (error) {
         Pop.error(error)
       }
-
+      // function formatDate(date) {
+      //   date.toLocalDateString('en-US', { month: 'numeric', weekday: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' })
+      // }
 
 
     }
     return {
       getPosts,
-      getDate() {
-        return this.posts.createdAt.toLocalDateString('en-US', {
-          month: 'numeric', weekday: 'short', day: 'numeric', year:
-            'numeric', hour: 'numeric', minute: 'numeric'
-        })
-
-      },
+      // formatDate,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account)
 

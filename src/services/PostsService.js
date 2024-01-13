@@ -16,9 +16,9 @@ class PostsService {
   }
 
   async createPost(postData) {
-    const response = await api.put('api/posts', postData)
+    const response = await api.post('api/posts', postData)
     logger.log('new post', response.data)
-    AppState.posts.push(new Post(post))
+    AppState.posts.push(new Post(response.data))
   }
 
   async changePage(url) {
