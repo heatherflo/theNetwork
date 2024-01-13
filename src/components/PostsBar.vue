@@ -11,7 +11,9 @@
       </div>
       <div> {{ post.createdAt }}</div>
       <div v-if="account" class="col-2">
-        <i role="button" @click="clickLike()" class="fs-3 mdi mdi-heart-outline">{{ post.likes.length }}</i>
+        <i role="button" @click="post.likes.length++" class="fs-3 mdi mdi-heart-outline"></i>
+        <i role="button" @click="post.likes.length--" class="fs-3 mdi mdi-emoticon-sad-outline"></i>
+        {{ post.likes.length }}
       </div>
       <div v-else>
         <i class="fs-3 mdi mdi-heart-outline">{{ post.likes.length }}</i>
