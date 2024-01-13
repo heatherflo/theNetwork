@@ -10,9 +10,19 @@ class PostsService {
     const response = await api.get('api/posts')
     logger.log('getting posts', response.data)
     AppState.posts = response.data.posts.map(post => new Post(post))
-    // const newPost = new Post(response.data)
-    // AppState.posts = newPost
+    // AppState.currentPage = response.data.page
+    // AppState.totalPages = response.data.totalPages
+
   }
+
+  async changePage(url) {
+    const response = await api.get(url)
+    logger.log('getting new page', response.data)
+    AppState.posts = response.data.posts.map(post => new Post(post))
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
+  }
+
 
 }
 

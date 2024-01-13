@@ -1,5 +1,5 @@
 <template>
-  <div class="AccountBar">
+  <div class="AccountBar sticky-top">
     <div v-if="account">
       <p>
         hello {{ account.name }}

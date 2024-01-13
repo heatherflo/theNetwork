@@ -9,7 +9,7 @@
       <div class="col-2">
         {{ post.creator.name }}
       </div>
-      <div> {{ post.createdAt }}</div>
+      <div> {{ getDate }}</div>
       <div v-if="account" class="col-2">
         <i role="button" @click="post.likes.length++" class="fs-3 mdi mdi-heart-outline"></i>
         <i role="button" @click="post.likes.length--" class="fs-3 mdi mdi-emoticon-sad-outline"></i>
@@ -31,13 +31,10 @@ import { computed, ref, onMounted } from 'vue';
 import Pop from '../utils/Pop';
 import { postsService } from '../services/PostsService';
 
+
 export default {
   setup() {
     let likes = 0
-
-    function clickLike() {
-
-    }
 
     onMounted(() => {
       getPosts()
@@ -53,7 +50,12 @@ export default {
     }
     return {
       getPosts,
-      clickLike,
+      getDate() {
+        return this.posts.createdAt.toLocalDateString('en-US', {
+          month: 'numeric', weekday: 'short', day: 'numeric', year:
+            'numeric', hour: 'numeric', minute: 'numeric'
+        })
+      },
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account)
 
@@ -66,12 +68,14 @@ export default {
 <style lang="scss" scoped>
 .profile-pic {
   height: 5vh;
-  object-fit: fill;
+  width: 5vh;
+  object-fit: cover;
   border-radius: 50%;
 }
 
 .img {
   max-height: 250px;
+  max-width: 500px;
   object-fit: center;
 }
 </style>
