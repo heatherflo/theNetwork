@@ -15,6 +15,12 @@ class PostsService {
 
   }
 
+  async createPost(postData) {
+    const response = await api.put('api/posts', postData)
+    logger.log('new post', response.data)
+    AppState.posts.push(new Post(post))
+  }
+
   async changePage(url) {
     const response = await api.get(url)
     logger.log('getting new page', response.data)
@@ -22,6 +28,8 @@ class PostsService {
     AppState.currentPage = response.data.page
     AppState.totalPages = response.data.totalPages
   }
+
+
 
 
 }

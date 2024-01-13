@@ -1,5 +1,5 @@
 <template>
-  <div class="PostsVue card shadow rounded p-2 m-3" v-for="post in posts" :key="post.id">
+  <div class="PostsVue card shadow rounded p-2 mt-3" v-for="post in posts" :key="post.id">
     {{ post.body }}
     <img class="mt-2 img" :src="post.imgUrl" :alt="post.creator.name">
     <section class="row justify-content-between m-3 align-items-center">
@@ -47,6 +47,7 @@ export default {
       }
 
 
+
     }
     return {
       getPosts,
@@ -55,6 +56,7 @@ export default {
           month: 'numeric', weekday: 'short', day: 'numeric', year:
             'numeric', hour: 'numeric', minute: 'numeric'
         })
+
       },
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account)
@@ -74,8 +76,9 @@ export default {
 }
 
 .img {
-  max-height: 250px;
-  max-width: 500px;
-  object-fit: center;
+  max-height: 300px;
+  max-width: auto;
+  object-fit: cover;
+  object-position: center;
 }
 </style>

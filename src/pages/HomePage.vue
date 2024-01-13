@@ -1,14 +1,18 @@
 <template>
   <div class="container-fluid">
-    <section class="row">
-      <div class="col-3">
+
+
+    <section class="row justify-content-between">
+      <div class="col-2">
         <AccountBar />
       </div>
       <div class="col-6">
+        <PostForm />
         <PostsBar />
         <div class="d-flex justify-content-between">
-          <p role="button" @click="changePage(currentPage++)" class="color">&lt older</p>
-          <p role="button" @click="changePage(currentPage--)" class="color">newer ></p>
+          <p role="button" @click="changePage(currentPage + 1)" :disabled="currentPage == 1" class="color">&lt older</p>
+          <p role="button" @click="changePage(currentPage - 1)" :disabled="currentPage == totalPages" class="color">newer
+            ></p>
         </div>
       </div>
       <div class="col-2">
@@ -26,13 +30,14 @@ import PostsBar from '../components/PostsBar.vue';
 import AdsBar from '../components/AdsBar.vue';
 import Pop from '../utils/Pop';
 import { postsService } from '../services/PostsService'
+import PostForm from '../components/PostForm.vue';
 
 export default {
   setup() {
 
     async function changePage(pageNumber) {
       try {
-        await postsService.getPosts(`posts?page=${pageNumber}`)
+        await postsService.changePage(`posts?page=${pageNumber}`)
       } catch (error) {
         Pop.error(error)
       }
@@ -46,7 +51,7 @@ export default {
 
     }
   },
-  components: { AccountBar, PostsBar, AdsBar }
+  components: { AccountBar, PostsBar, AdsBar, PostForm }
 }
 </script>
 
