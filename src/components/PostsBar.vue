@@ -1,7 +1,7 @@
 <template>
   <div class="PostsVue card shadow rounded p-2 m-3" v-for="post in posts" :key="post.id">
     {{ post.body }}
-    <img class="mt-2" :src="post.imgUrl" :alt="post.creator.name">
+    <img class="mt-2 img" :src="post.imgUrl" :alt="post.creator.name">
     <section class="row justify-content-between m-3 align-items-center">
       <div class="col-2">
         <img class="profile-pic mt-2" :src="post.creator.picture" :alt="post.creator.name">
@@ -64,12 +64,12 @@ export default {
 <style lang="scss" scoped>
 .profile-pic {
   height: 5vh;
-  object-fit: auto;
+  object-fit: fill;
   border-radius: 50%;
 }
 
 .img {
-  max-height: 100px;
+  max-height: 250px;
   object-fit: center;
 }
 </style>
