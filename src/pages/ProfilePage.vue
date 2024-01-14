@@ -2,9 +2,9 @@
   <div class="ProfilePage" v-if="profile">
     <div>
       hello
-      <RouterLink :to="{ name: 'Profile', params: { profileId: profile.id } }">
-        <img class="profile-picture" :src="profile.picture" :alt="profile.name">
-      </RouterLink>
+
+      <img class="profile-picture" :src="profile.picture" :alt="profile.name">
+
 
     </div>
 
@@ -22,28 +22,14 @@ import { profilesService } from '../services/ProfilesService';
 
 export default {
   setup() {
-    // const route = useRoute()
-    // const watchableProfileId = computed(() => route.params.profileId)
+    const route = useRoute()
 
-    // async function getProfileById() {
-    //   const profileId = route.params.profileId
-    //   await profilesService.getProfileById(profileId);
-    // };
-
-    // watch(
-    //   watchableProfileId,
-    //   () => {
-
-    //   getProfileById();
-    // },
-    // { immediate: true })
     return {
       profile: computed(() => AppState.profile),
-
+      route,
     };
   },
 
-  components: { RouterLink }
 };
 </script>
 

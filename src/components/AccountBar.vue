@@ -15,15 +15,12 @@
     <!-- <div v-if="account.id && !account.github">no github</div> -->
 
     <!-- this works ⬇️ -->
+    <div v-if="account.id && account.graduated">Codeworks Graduate</div>
     <div v-if="account.id && account.github"><i class="mdi mdi-github"></i></div>
     <div v-if="account.id && account.linkedin"><i class="mdi mdi-linkedin"></i></div>
     <div v-if="account.id && account.resume"><i class="mdi mdi-file-account"></i></div>
 
   </div>
-
-
-
-  <!-- <Socials /> -->
 </template>
 
 
@@ -34,7 +31,7 @@ import Pop from '../utils/Pop';
 import { useRoute } from 'vue-router';
 import { RouterLink } from 'vue-router';
 import { profilesService } from '../services/ProfilesService';
-import Socials from './Socials.vue';
+
 
 export default {
   setup() {
@@ -59,7 +56,7 @@ export default {
     };
   },
 
-  components: { RouterLink, Socials }
+  components: { RouterLink, }
 };
 </script>
 

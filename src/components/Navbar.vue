@@ -11,7 +11,8 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'Profile' }" class="btn text-light selectable text-lowercase">
+          <router-link :to="{ name: 'Profile', params: { profileId: account.id } }"
+            class="btn text-light selectable text-lowercase">
             Profile
           </router-link>
         </li>
@@ -24,9 +25,10 @@
 </template>
 
 <script>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { AppState } from '../AppState';
 export default {
   setup() {
 
@@ -38,6 +40,7 @@ export default {
 
     return {
       theme,
+      account: computed(() => AppState.account),
       toggleTheme() {
         theme.value = theme.value == 'light' ? 'dark' : 'light'
         document.documentElement.setAttribute('data-bs-theme', theme.value)
