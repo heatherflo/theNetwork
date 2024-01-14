@@ -33,15 +33,22 @@ import { postsService } from '../services/PostsService';
 export default {
   setup() {
     const postData = ref({})
+
+    function resetForm() {
+      postData.value = {}
+    }
+
     async function createPost() {
       try {
         await postsService.createPost(postData.value)
         Pop.success('you created a post!')
+        resetForm()
       } catch (error) {
         Pop.error(error)
       }
     }
     return {
+      resetForm,
       createPost,
       postData,
       account: computed(() => AppState.account)

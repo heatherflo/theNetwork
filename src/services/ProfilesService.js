@@ -1,6 +1,7 @@
 import { api } from "./AxiosService"
 import { logger } from "../utils/Logger"
 import { Profile } from "../models/Profile.js"
+import { AppState } from "../AppState"
 
 
 class ProfilesService {
@@ -9,7 +10,7 @@ class ProfilesService {
     const response = await api.get(`api/profile/${profileId}`)
     logger.log('getting profile', response.data)
     const newProfile = new Profile(response.data)
-    AppState.profile = newProfile
+    AppState.activeProfile = newProfile
   }
 
 

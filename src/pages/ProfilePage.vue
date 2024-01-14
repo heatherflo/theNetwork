@@ -19,6 +19,8 @@ import Pop from '../utils/Pop';
 import { useRoute } from 'vue-router';
 import { profilesService } from '../services/ProfilesService';
 import PostsBar from '../components/PostsBar.vue';
+import { logger } from '../utils/Logger';
+import { postsService } from '../services/PostsService';
 
 export default {
   setup() {
@@ -34,15 +36,29 @@ export default {
       catch (error) {
         Pop.error(error);
       }
+    };
+
+    async function getPostsById() {
+      try {
+        const profileId = route.params.profileId;
+        await postsService.getPostById(profileId)
+      } catch (error) {
+        Pop.error(error)
+      }
     }
-    ;
-    onMounted(() => {
-      getProfile();
-    });
+
+    watch(watchableProfileId, () => {
+      logger.log(route);
+      getProfileById();
+      getPostsById();
+      postsService.clearAppState()
+    },
+      { immediate: true }
+    )
+
     return {
-      getProfile,
+      post: computed(() => AppState.posts),
       profile: computed(() => AppState.profile),
-      route,
     };
   },
   components: { PostsBar }

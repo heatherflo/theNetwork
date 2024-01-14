@@ -50,7 +50,6 @@ import Pop from '../utils/Pop';
 export default {
   setup() {
     const editable = ref({})
-    account: computed(() => AppState.account)
 
     watch(
       account,
@@ -62,8 +61,8 @@ export default {
 
 
     return {
+      account: computed(() => AppState.account),
       editable,
-      account,
       async upDateAccount() {
         try {
           const accountData = editable.value

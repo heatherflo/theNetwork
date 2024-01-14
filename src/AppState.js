@@ -7,16 +7,19 @@ export const AppState = reactive({
   account: {},
 
   /**@type {Profile} */
-  profile: null,
+  activeProfile: null,
 
   /**@type {Post[]} */
   posts: [],
+
+  /** @type {Post[]} */
+  profilePosts: [],
 
   /**@type {Ad[]} */
   ads: [],
 
   currentPage: 1,
   totalPages: 1,
-  searchTerm: ''
+  searchedTerm: ''
 
 })

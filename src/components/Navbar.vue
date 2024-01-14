@@ -13,9 +13,10 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'Profile', params: { profileId: account.id } }" class="text-light btn text-lowercase">
+          <!-- <router-link :to="{ name: 'Profile', params: { profileId: account.id } }" class="text-light btn text-lowercase">
             Profile
-          </router-link>
+          </router-link> -->
+          Profile
         </li>
       </ul>
 
@@ -32,8 +33,10 @@ import Login from './Login.vue';
 import { AppState } from '../AppState';
 import { RouterLink } from 'vue-router';
 import SearchBar from './SearchBar.vue'
+import { Profile } from '../models/Profile';
 
 export default {
+  props: { profile: { type: Profile, required: true } },
   setup() {
 
     const theme = ref(loadState('theme') || 'light')

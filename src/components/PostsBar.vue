@@ -36,6 +36,8 @@
     </section>
 
 
+
+
   </div>
 </template>
 
@@ -45,43 +47,48 @@ import { AppState } from '../AppState';
 import { computed, ref, onMounted, onUpdated } from 'vue';
 import Pop from '../utils/Pop';
 import { postsService } from '../services/PostsService';
+import SearchBar from './SearchBar.vue';
 
 
 export default {
   setup() {
-    let likes = 0
+    let likes = 0;
+
+
 
     onMounted(() => {
-      getPosts()
-    })
+      getPosts();
+    });
     async function getPosts() {
       try {
-        await postsService.getPosts()
-      } catch (error) {
-        Pop.error(error)
+        await postsService.getPosts();
       }
-
+      catch (error) {
+        Pop.error(error);
+      }
     }
     async function deletePost(postId) {
       try {
         if (await Pop.confirm('Are you sure?')) {
-          await postsService.deletePost(postId)
-          Pop.success("It's gone!")
+          await postsService.deletePost(postId);
+          Pop.success("It's gone!");
         }
-      } catch (error) {
-        Pop.error(error)
+      }
+      catch (error) {
+        Pop.error(error);
       }
 
     }
     return {
+
       getPosts,
       deletePost,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account),
-      profile: computed(() => AppState.profile)
-
-    }
-  }
+      profile: computed(() => AppState.profile),
+    };
+  },
+  components: { SearchBar }
 };
 </script>
 
