@@ -35,6 +35,11 @@ class PostsService {
     AppState.posts.splice(indexToRemove, 1)
   }
 
+  async getPostById(postId) {
+    const response = await api.get(`api/posts/${postId}`)
+    logger.log('getting post by id', response.data)
+    AppState.
+  }
 
 
 }

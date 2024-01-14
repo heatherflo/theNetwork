@@ -1,14 +1,14 @@
 <template>
-  <div class="ProfilePage" v-if="profile">
+  <section class="ProfilePage row" v-if="profile">
     <div>
-      hello
-
       <img class="profile-picture" :src="profile.picture" :alt="profile.name">
-
-
     </div>
+    <div class="col-3">
+      <img class="coverImg" :src="profile.coverImg" :alt="profile.name">
+    </div>
+    <PostsBar />
 
-  </div>
+  </section>
 </template>
 
 
@@ -18,30 +18,34 @@ import { computed, ref, onMounted, watch } from 'vue';
 import Pop from '../utils/Pop';
 import { useRoute } from 'vue-router';
 import { profilesService } from '../services/ProfilesService';
+import PostsBar from '../components/PostsBar.vue';
 
 export default {
   setup() {
-    const route = useRoute()
+    const route = useRoute();
+    const watchableProfileId = computed(() => route.params.profileId)
 
-    async function getProfile() {
+
+    async function getProfileById() {
       try {
         const profileId = route.params.profileId;
-        await profilesService.getProfile(profileId)
-      } catch (error) {
-        Pop.error(error)
+        await profilesService.getProfileById(profileId);
       }
-    };
+      catch (error) {
+        Pop.error(error);
+      }
+    }
+    ;
     onMounted(() => {
-      getProfile()
-    })
-
+      getProfile();
+    });
     return {
       getProfile,
       profile: computed(() => AppState.profile),
       route,
     };
   },
-
+  components: { PostsBar }
 };
 </script>
 

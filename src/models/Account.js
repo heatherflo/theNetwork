@@ -7,6 +7,7 @@ export class Account {
     this.github = data.github
     this.graduated = data.graduated
     this.linkedin = data.linkedin
+    this.bio = data.bio
     // TODO add additional properties if needed
   }
 }

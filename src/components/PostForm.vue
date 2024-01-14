@@ -9,8 +9,8 @@
             name="post-picture" id="post-picture">
         </div>
         <div>
-          <input v-model="postData.body" class="form-control" placeholder="What do you want to say?" required type="text"
-            name="body" minlength="3" maxlength="300">
+          <textarea v-model="postData.body" name="body" id="body" placeholder="What do you want to say today?"
+            class="w-100 mt-2" rows="10"></textarea>
           <label for="body"></label>
 
         </div>
