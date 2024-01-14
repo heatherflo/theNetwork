@@ -1,24 +1,27 @@
 <template>
-  <div class="AccountBar sticky-top">
+  <div class="AccountBar sticky-top background m-1 p-4">
     <div v-if="account.id">
-      <p>
+      <p class="fs-3 text-center">
         hello {{ account.name }}
       </p>
-      <!-- <RouterLink :to="{ name: 'Profile', params: { profileId: profile.id } }">
-        <img class="profile-picture" :src="profile.picture" :alt="profile.name">
-      </RouterLink> -->
-      <img :src="account.picture" :alt="account.name">
+      <div class="text-center">
+        <img :src="account.picture" :alt="account.name">
+      </div>
     </div>
-    <div v-else="!account">
-      please log in to see account
+    <div class="text-center fs-2" v-else="!account">
+      Please Login
     </div>
-    <!-- <div v-if="account.id && !account.github">no github</div> -->
+
 
     <!-- this works ⬇️ -->
-    <div v-if="account.id && account.graduated">Codeworks Graduate</div>
-    <div v-if="account.id && account.github"><i class="mdi mdi-github"></i></div>
-    <div v-if="account.id && account.linkedin"><i class="mdi mdi-linkedin"></i></div>
-    <div v-if="account.id && account.resume"><i class="mdi mdi-file-account"></i></div>
+    <div class="text-center mt-2" v-if="account.id && !account.graduated">Codeworks<i><i
+          class="fs-2 mdi mdi-school"></i></i>
+    </div>
+    <div class="fs-2 text-center">
+      <div v-if="account.id && !account.github"><i class="mdi mdi-github"></i></div>
+      <div v-if="account.id && !account.linkedin"><i class="mdi mdi-linkedin"></i></div>
+      <div v-if="account.id && !account.resume"><i class="mdi mdi-file-account"></i></div>
+    </div>
 
   </div>
 </template>
@@ -36,19 +39,10 @@ import { profilesService } from '../services/ProfilesService';
 export default {
   setup() {
     const route = useRoute()
-    // async function getProfile() {
-    //   try {
-    //     await profilesService.getProfile()
-    //   } catch (error) {
-    //     Pop.error(error)
-    //   }
-    // }
-    // onMounted(() => {
-    //   getProfile()
-    // })
+
 
     return {
-      // getProfile,
+
 
       account: computed(() => AppState.account),
       profile: computed(() => AppState.profile)
@@ -61,4 +55,9 @@ export default {
 </script>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.background {
+  background-color: #17a3b860;
+  height: 100vh;
+}
+</style>

@@ -2,11 +2,11 @@
   <div class="container-fluid">
 
 
-    <section class="row justify-content-between">
-      <div class="col-2">
+    <section class="row  m-2 justify-content-between">
+      <div class="col-2 mt-3">
         <AccountBar />
       </div>
-      <div class="col-6">
+      <div class="col-6 mt-3">
         <PostForm />
         <PostsBar />
         <div class="d-flex justify-content-between">

@@ -1,11 +1,13 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-info px-3">
     <router-link class="navbar-brand d-flex align-items-center" :to="{ name: 'Home' }">
-      <div class="">
+      <div class="d-flex">
         <i class=" fs-1 mdi mdi-server-network-outline"></i>
       </div>
-      <div class="ps-2">the</div>
-      <div>NETWORK</div>
+      <div class="ps-2 text-white">the</div>
+      <RouterLink :to="{ name: 'Home' }">
+        <div class="text-white">NETWORK</div>
+      </RouterLink>
     </router-link>
 
     <div class="collapse navbar-collapse" id="navbarText">
@@ -16,8 +18,8 @@
           </router-link>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
 
+      <SearchBar />
       <Login />
     </div>
   </nav>
@@ -29,6 +31,7 @@ import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import { AppState } from '../AppState';
 import { RouterLink } from 'vue-router';
+import SearchBar from './SearchBar.vue'
 
 export default {
   setup() {
@@ -50,7 +53,7 @@ export default {
       }
     }
   },
-  components: { Login, RouterLink }
+  components: { Login, RouterLink, SearchBar }
 }
 </script>
 
