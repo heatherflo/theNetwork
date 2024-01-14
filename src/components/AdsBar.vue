@@ -1,7 +1,7 @@
 <template>
   <div class="AdsBar " v-for="ad in ads" :key="ad.id">
     <div>
-      <img class="img-fluid " :src="ad.tall" :alt="ad.title">
+      <img class="img-fluid p-2" :src="ad.tall" :alt="ad.title">
     </div>
 
 

@@ -1,19 +1,31 @@
 <template>
   <div class="PostsVue card shadow rounded p-2 mt-3" v-for="post in posts" :key="post.id">
-    {{ post.body }}
+    <section class="row justify-content-between align-items-center pb-2">
+      <div class="col-1">
+        <img class="profile-pic mt-2 text-start" :src="post.creator.picture" :alt="post.creator.name">
+      </div>
+      <div class="col-8 text-start">
+        <div>
+          {{ post.creator.name }}
+        </div>
+        <div>
+          {{ post.creator.createdAt=new Date().toLocaleDateString('en-US', {
+            month: 'numeric', day: 'numeric', year: 'numeric'
+          }) }}
+        </div>
+
+      </div>
+      <div class="col-1 m-2">
+        <i role="button" v-if="account.id == post.creatorId" @click="deletePost(post.id)"
+          class=" fs-3 delete mdi mdi-trash-can-outline"></i>
+      </div>
+    </section>
     <img class="mt-2 img" :src="post.imgUrl" :alt="post.creator.name">
-    <section class="row justify-content-between m-3 align-items-center">
-      <div class="col-2">
-        <img class="profile-pic mt-2" :src="post.creator.picture" :alt="post.creator.name">
-      </div>
-      <div class="col-2">
-        date posted: {{ post.creator.createdAt=new Date().toLocaleDateString('en-US', {
-          month: 'numeric', weekday:
-            'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'
-        }) }}
-      </div>
-      <!-- <div> {{ post.creator.createdAt }}</div> -->
-      <div v-if="account.id" class="col-2">
+    <section class="row m-1 justify-content-between align-items-center">
+      <p>
+        {{ post.body }}
+      </p>
+      <div v-if="account.id" class="col-12 text-end">
         <i role="button" @click="post.likes.length++" class="fs-3 mdi mdi-heart-outline"></i>
         <i role="button" @click="post.likes.length--" class="fs-3 mdi mdi-emoticon-sad-outline"></i>
         {{ post.likes.length }}
@@ -49,12 +61,24 @@ export default {
         Pop.error(error)
       }
 
+    }
+    async function deletePost(postId) {
+      try {
+        if (await Pop.confirm('Are you sure?')) {
+          await postsService.deletePost(postId)
+          Pop.success("It's gone!")
+        }
+      } catch (error) {
+        Pop.error(error)
+      }
 
     }
     return {
       getPosts,
+      deletePost,
       posts: computed(() => AppState.posts),
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      profile: computed(() => AppState.profile)
 
     }
   }
@@ -75,5 +99,9 @@ export default {
   max-width: auto;
   object-fit: cover;
   object-position: center;
+}
+
+.delete {
+  color: red;
 }
 </style>

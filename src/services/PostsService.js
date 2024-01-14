@@ -29,6 +29,11 @@ class PostsService {
     AppState.totalPages = response.data.totalPages
   }
 
+  async deletePost(postId) {
+    const response = await api.delete(`api/posts/${postId}`)
+    const indexToRemove = AppState.posts.findIndex(post => post.id == postId)
+    AppState.posts.splice(indexToRemove, 1)
+  }
 
 
 
