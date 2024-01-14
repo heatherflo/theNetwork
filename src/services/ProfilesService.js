@@ -1,6 +1,6 @@
 import { api } from "./AxiosService"
 import { logger } from "../utils/Logger"
-import { Profile } from "../models.Profile.js"
+import { Profile } from "../models/Profile.js"
 
 
 class ProfilesService {

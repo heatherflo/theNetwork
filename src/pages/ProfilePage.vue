@@ -17,14 +17,26 @@ import { AppState } from '../AppState';
 import { computed, ref, onMounted, watch } from 'vue';
 import Pop from '../utils/Pop';
 import { useRoute } from 'vue-router';
-import { RouterLink } from 'vue-router';
 import { profilesService } from '../services/ProfilesService';
 
 export default {
   setup() {
     const route = useRoute()
 
+    async function getProfile() {
+      try {
+        const profileId = route.params.profileId;
+        await profilesService.getProfile(profileId)
+      } catch (error) {
+        Pop.error(error)
+      }
+    };
+    onMounted(() => {
+      getProfile()
+    })
+
     return {
+      getProfile,
       profile: computed(() => AppState.profile),
       route,
     };
