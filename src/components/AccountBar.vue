@@ -4,8 +4,8 @@
       <p class="fs-3 text-center">
         hello {{ account.name }}
       </p>
-      <div class="text-center profileImg">
-        <img :src="account.picture" :alt="account.name">
+      <div class="text-center ">
+        <img class="profileImg" :src="account.picture" :alt="account.name">
       </div>
     </div>
     <div class="text-center fs-2" v-else="!account">
@@ -14,13 +14,13 @@
 
 
     <!-- this works ⬇️ -->
-    <div class="text-center mt-2" v-if="account.id && !account.graduated">Codeworks<i><i
+    <div class="text-center mt-2" v-if="account.id && account.graduated">Codeworks<i><i
           class="fs-2 mdi mdi-school"></i></i>
     </div>
     <div class="fs-2 text-center">
-      <div v-if="account.id && !account.github"><i class="mdi mdi-github"></i></div>
-      <div v-if="account.id && !account.linkedin"><i class="mdi mdi-linkedin"></i></div>
-      <div v-if="account.id && !account.resume"><i class="mdi mdi-file-account"></i></div>
+      <div v-if="account.id && account.github"><i class="mdi mdi-github"></i></div>
+      <div v-if="account.id && account.linkedin"><i class="mdi mdi-linkedin"></i></div>
+      <div v-if="account.id && account.resume"><i class="mdi mdi-file-account"></i></div>
     </div>
 
   </div>
@@ -62,8 +62,9 @@ export default {
 }
 
 .profileImg {
-  height: 20vh;
-  width: 20vh;
+  height: 80px;
+  width: 80px;
+  object-fit: cover;
   border-radius: 50%;
 }
 </style>

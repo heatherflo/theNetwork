@@ -2,9 +2,11 @@
   <div class="container-fluid">
 
     <section class="about row">
-      <h1>Welcome {{ account.name }}</h1>
-      <img class="rounded" :src="account.picture" alt="" />
-      <p>{{ account.email }}</p>
+      <div class="col-12">
+        <h1>Welcome {{ account.name }}</h1>
+        <img class="rounded profile-picture" :src="account.picture" :alt="account.name" />
+        <p>{{ account.email }}</p>
+      </div>
     </section>
     <section class="row">
       <div class="col-12">
@@ -18,9 +20,9 @@
             <label for="coverImg">Cover Image</label>
             <input v-model="editable.coverImg" class="w-100" id="coverImg" type="url">
           </div>
-          <div class="mb-2">
+          <div class="mb-2 ">
             <label for="picture">Profile Picture</label>
-            <input v-model="editable.picture" class="w-100" id="picture" type="url">
+            <input v-model="editable.picture" class="w-100 " id="picture" type="url">
           </div>
           <div class="mb-3">
             <label for="bio">Bio</label>
@@ -83,7 +85,10 @@ export default {
 </script>
 
 <style scoped>
-img {
-  max-width: 100px;
+.profile-picture {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 </style>

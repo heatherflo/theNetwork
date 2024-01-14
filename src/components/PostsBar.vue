@@ -2,7 +2,9 @@
   <div class="PostsVue card shadow rounded p-2 mt-3" v-for="post in posts" :key="post.id">
     <section class="row justify-content-between align-items-center pb-2">
       <div class="col-1">
-        <img class="profile-pic mt-2 text-start" :src="post.creator.picture" :alt="post.creator.name">
+        <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
+          <img class="profile-pic mt-2 text-start" :src="post.creator.picture" :alt="post.creator.name">
+        </router-link>
       </div>
       <div class="col-8 text-start">
         <div>
@@ -48,9 +50,14 @@ import { computed, ref, onMounted, onUpdated } from 'vue';
 import Pop from '../utils/Pop';
 import { postsService } from '../services/PostsService';
 import SearchBar from './SearchBar.vue';
+import { RouterLink } from 'vue-router';
+import { Post } from '../models/Post';
 
 
 export default {
+  props: {
+    post: { type: Post, required: true }
+  },
   setup() {
     let likes = 0;
 
@@ -88,7 +95,7 @@ export default {
       profile: computed(() => AppState.profile),
     };
   },
-  components: { SearchBar }
+  components: { SearchBar, RouterLink }
 };
 </script>
 

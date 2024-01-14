@@ -7,7 +7,7 @@ import { AppState } from "../AppState"
 class ProfilesService {
 
   async getProfileById(profileId) {
-    const response = await api.get(`api/profile/${profileId}`)
+    const response = await api.get(`api/profiles/${profileId}`)
     logger.log('getting profile', response.data)
     const newProfile = new Profile(response.data)
     AppState.activeProfile = newProfile
