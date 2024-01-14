@@ -12,12 +12,7 @@
 
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
-        <li>
-          <!-- <router-link :to="{ name: 'Profile', params: { profileId: account.id } }" class="text-light btn text-lowercase">
-            Profile
-          </router-link> -->
-          Profile
-        </li>
+
       </ul>
 
       <SearchBar />

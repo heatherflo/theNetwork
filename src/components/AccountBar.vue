@@ -4,7 +4,7 @@
       <p class="fs-3 text-center">
         hello {{ account.name }}
       </p>
-      <div class="text-center">
+      <div class="text-center profileImg">
         <img :src="account.picture" :alt="account.name">
       </div>
     </div>
@@ -59,5 +59,11 @@ export default {
 .background {
   background-color: #17a3b860;
   height: 100vh;
+}
+
+.profileImg {
+  height: 20vh;
+  width: 20vh;
+  border-radius: 50%;
 }
 </style>
