@@ -7,10 +7,13 @@
         <img class="profile-pic mt-2" :src="post.creator.picture" :alt="post.creator.name">
       </div>
       <div class="col-2">
-        {{ post.creator.name }}
+        date posted: {{ post.creator.createdAt=new Date().toLocaleDateString('en-US', {
+          month: 'numeric', weekday:
+            'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric'
+        }) }}
       </div>
-      <div> {{ }}</div>
-      <div v-if="account" class="col-2">
+      <!-- <div> {{ post.creator.createdAt }}</div> -->
+      <div v-if="account.id" class="col-2">
         <i role="button" @click="post.likes.length++" class="fs-3 mdi mdi-heart-outline"></i>
         <i role="button" @click="post.likes.length--" class="fs-3 mdi mdi-emoticon-sad-outline"></i>
         {{ post.likes.length }}
@@ -45,15 +48,11 @@ export default {
       } catch (error) {
         Pop.error(error)
       }
-      // function formatDate(date) {
-      //   date.toLocalDateString('en-US', { month: 'numeric', weekday: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' })
-      // }
 
 
     }
     return {
       getPosts,
-      // formatDate,
       posts: computed(() => AppState.posts),
       account: computed(() => AppState.account)
 
