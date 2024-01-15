@@ -35,11 +35,11 @@ class PostsService {
     AppState.posts.splice(indexToRemove, 1)
   }
 
-  async getPostById(postId) {
-    const response = await api.get(`api/posts/${postId}`)
-    logger.log('getting post by id', response.data)
-    const newProfilePost = new Post(response.data)
-    AppState.profilePosts = newProfilePost
+  async getPostById(profileId) {
+    const response = await api.get(`api/posts/${profileId}`)
+    logger.log('getting post by id in service ', response.data)
+    const newPosts = response.data.map(post => new Post(post))
+    AppState.profilePosts = newPost
   }
 
   clearAppState() {
