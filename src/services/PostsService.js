@@ -43,7 +43,7 @@ class PostsService {
   }
 
   clearAppState() {
-    AppState.profile = null
+    AppState.activeProfile = null
     AppState.profilePosts = []
   }
 
