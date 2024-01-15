@@ -40,6 +40,11 @@
             <label for="graduated">Graduated?</label>
             <input v-model="editable.graduated" class="ms-2" id="graduated" type="checkbox">
           </div>
+          <div class="mb-2">
+            <label for="class">Graduating Class</label>
+            <input v-model="editable.class" class="w-100 mb-2" id="class" type="text">
+          </div>
+
           <button class="form-control shadow">Make Changes</button>
         </form>
       </div>
