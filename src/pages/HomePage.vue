@@ -4,6 +4,7 @@
 
     <section class="row  m-2 justify-content-between">
       <div class="col-2 mt-3">
+        <SearchBar />
         <AccountBar />
       </div>
       <div class="col-6 mt-3">
@@ -31,8 +32,11 @@ import AdsBar from '../components/AdsBar.vue';
 import Pop from '../utils/Pop';
 import { postsService } from '../services/PostsService'
 import PostForm from '../components/PostForm.vue';
+import { Post } from '../models/Post';
+import SearchBar from '../components/SearchBar.vue';
 
 export default {
+
   setup() {
 
     async function changePage(pageNumber) {
@@ -45,13 +49,14 @@ export default {
 
     return {
       changePage,
+      post: computed(() => AppState.posts),
       account: computed(() => AppState.account),
       currentPage: computed(() => AppState.currentPage),
-      totalPages: computed(() => AppState.totalPages)
-
+      totalPages: computed(() => AppState.totalPages),
+      searched: computed(() => AppState.searchedTerm)
     }
   },
-  components: { AccountBar, PostsBar, AdsBar, PostForm }
+  components: { AccountBar, PostsBar, AdsBar, PostForm, SearchBar }
 }
 </script>
 

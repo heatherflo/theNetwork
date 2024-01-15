@@ -5,7 +5,7 @@
         <i class=" fs-1 mdi mdi-server-network-outline"></i>
       </div>
       <div class="ps-2 text-white">the</div>
-      <RouterLink :to="{ name: 'Home' }">
+      <RouterLink :to="{ path: '/' }">
         <div class="text-white">NETWORK</div>
       </RouterLink>
     </router-link>
@@ -31,7 +31,7 @@ import SearchBar from './SearchBar.vue'
 import { Profile } from '../models/Profile';
 
 export default {
-  props: { profile: { type: Profile, required: true } },
+  // props: { profile: { type: Profile, required: true } },
   setup() {
 
     const theme = ref(loadState('theme') || 'light')

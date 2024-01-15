@@ -31,7 +31,7 @@ export default {
       searchTerm,
       async searchPosts() {
         try {
-          logger.log('newSearch', searchTerm.value)
+          // logger.log('newSearch', searchTerm.value)
           await postsService.searchPosts(searchTerm.value);
           resetSearchForm();
         }

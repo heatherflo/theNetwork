@@ -55,11 +55,11 @@ import { Post } from '../models/Post';
 
 
 export default {
-  props: {
-    post: { type: Post, required: true }
-  },
+  // props: {
+  //   post: { type: Post, required: true }
+  // },
   setup() {
-    let likes = 0;
+
 
 
 

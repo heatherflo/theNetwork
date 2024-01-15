@@ -9,7 +9,7 @@
       </div>
     </section>
     <section class="row">
-      <div class="col-12">
+      <div class="col-8">
         <h3>Edit Account Data</h3>
         <form @submit.prevent="upDateAccount()">
           <div class="mb-2">
@@ -43,6 +43,9 @@
           <button class="form-control shadow">Make Changes</button>
         </form>
       </div>
+      <div class="col-3 m-2">
+        <AdsBar />
+      </div>
     </section>
   </div>
 </template>
@@ -52,35 +55,31 @@ import { computed, watch, ref } from 'vue';
 import { AppState } from '../AppState';
 import { accountService } from '../services/AccountService';
 import Pop from '../utils/Pop';
+import AdsBar from '../components/AdsBar.vue';
 
 export default {
   setup() {
-    const editable = ref({})
-    const account = computed(() => AppState.account)
-
-    watch(
-      account,
-      () => {
-        editable.value = { ...AppState.account }
-      },
-      { immediate: true }
-    )
-
-
+    const editable = ref({});
+    const account = computed(() => AppState.account);
+    watch(account, () => {
+      editable.value = { ...AppState.account };
+    }, { immediate: true });
     return {
       account,
       editable,
       async upDateAccount() {
         try {
-          const accountData = editable.value
-          await accountService.updateAccount(accountData)
-          Pop.success('Updated account!')
-        } catch (error) {
-          Pop.error(error)
+          const accountData = editable.value;
+          await accountService.updateAccount(accountData);
+          Pop.success('Updated account!');
+        }
+        catch (error) {
+          Pop.error(error);
         }
       }
-    }
-  }
+    };
+  },
+  components: { AdsBar }
 }
 </script>
 

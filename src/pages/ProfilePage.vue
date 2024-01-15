@@ -7,37 +7,41 @@
         <AccountBar />
       </div>
       <div class="col-6 mt-2">
-        <div class="card mt-2">
-          <div>
+        <div class="card mt-2" v-if="profile && profile.id">
 
-          </div>
-          <img class="profile-picture" :src="profile.picture" :alt="profile.name">
-          <img class="img-fluid coverImg" :src="profile.coverImg" :alt="profile.name">
+          <img v-if="profile.id && profile.picture" class="profile-picture" :src="profile.picture" :alt="profile.name">
+          <img v-if="profile.id && profile.coverImg" class="img-fluid coverImg" :src="profile.coverImg"
+            :alt="profile.name">
 
-          <h3 class="mt-5 ms-5">
+          <h3 v-if="profile.id && profile.name" class="mt-5 ms-5">
             {{ profile.name }}
           </h3>
           <h5 class="ms-5 mt-2 mb-4" v-if="profile.id && profile.graduated">Codeworks<i><i
                 class="fs-2 mdi mdi-school"></i></i>
+          </h5>
+          <h5 class="ms-5 mt-2 mb-4" v-if="profile.id && profile.class">{{ profile.class }}
           </h5>
           <div class="d-flex ms-3 p-3 ">
             <div v-if="profile.id && profile.github"><i class="fs-3 m-2 mdi mdi-github"></i></div>
             <div v-if="profile.id && profile.linkedin"><i class=" fs-3 m-2 mdi mdi-linkedin"></i></div>
             <div v-if="profile.id && profile.resume"><i class="fs-3 m-2 mdi mdi-file-account"></i></div>
           </div>
+          <div class="ms-4 mb-3 fs-5" v-if="profile.id && profile.bio">{{ profile.bio }}</div>
 
 
         </div>
 
         <PostForm />
-        <div v-for="post in posts" :key="post.id">
+        <div v-if="posts" v-for="post in posts" :key="post.id">
           <PostsBar :post="post" />
         </div>
-        <!-- <div class="d-flex justify-content-between">
-          <p role="button" @click="changePage(currentPage + 1)" :disabled="currentPage == 1" class="color">&lt older</p>
-          <p role="button" @click="changePage(currentPage - 1)" :disabled="currentPage == totalPages" class="color">newer
+        <div class="d-flex justify-content-between">
+          <p role="button" @click="getProfilePostsPages(currentPage + 1)" :disabled="currentPage == 1" class="color">&lt
+            older</p>
+          <p role="button" @click="getProfilePostsPages(currentPage - 1)" :disabled="currentPage == totalPages"
+            class="color">newer
             ></p>
-        </div> -->
+        </div>
       </div>
       <div class="col-2">
         <AdsBar />
@@ -58,11 +62,16 @@ import { postsService } from '../services/PostsService';
 import AccountBar from '../components/AccountBar.vue';
 import PostsBar from '../components/PostsBar.vue';
 import PostForm from '../components/PostForm.vue';
+import AdsBar from '../components/AdsBar.vue';
+import { Post } from '../models/Post';
 
 export default {
+  // props: { type: Post, required: true },
   setup() {
     const route = useRoute();
+    let currentPage = 1;
     const watchableProfileId = computed(() => route.params.profileId)
+
 
 
     async function getProfileById() {
@@ -84,6 +93,14 @@ export default {
         Pop.error(error)
       }
     }
+    async function getProfilePostsPages() {
+      try {
+        const profileId = route.params.profileId;
+        await postsService.getProfilePostsPages(profileId, currentPage)
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
 
     watch(watchableProfileId, () => {
       logger.log(route);
@@ -96,11 +113,15 @@ export default {
     )
 
     return {
-      post: computed(() => AppState.posts),
+
+      getProfilePostsPages,
+      posts: computed(() => AppState.profilePosts),
       profile: computed(() => AppState.activeProfile),
+      currentPage: computed(() => AppState.currentPage),
+      totalPages: computed(() => AppState.totalPages)
     };
   },
-  components: { AccountBar, PostsBar, PostForm }
+  components: { AccountBar, PostsBar, PostForm, AdsBar }
 };
 </script>
 
