@@ -30,28 +30,32 @@
 
 
         </div>
-
-        <PostForm />
-        <div v-if="posts" v-for="post in posts" :key="post.id">
-          <PostsBar :post="post" />
-        </div>
-        <div class="d-flex justify-content-between">
-          <p role="button" @click="getProfilePostsPages(currentPage + 1)" :disabled="currentPage == 1" class="color">&lt
-            older</p>
-          <p role="button" @click="getProfilePostsPages(currentPage - 1)" :disabled="currentPage == totalPages"
-            class="color">newer
-            ></p>
-        </div>
-      </div>
-      <div class="col-2">
-        <AdsBar />
       </div>
     </section>
+    <PostForm />
+
+    <div class="card col-6 m-2 shadow" v-for="post in posts">
+
+      <!-- {{ post.body }} -->
+      <PostCard :post="post" :key="post.id" />
+    </div>
+    <div class="d-flex justify-content-between">
+      <p role="button" @click="getProfilePostsPages(currentPage + 1)" :disable="currentPage == 1" class="color">&lt older
+      </p>
+      <p role="button" @click="getProfilePostsPages(currentPage - 1)" :disable="currentPage == totalPages" class="color">
+        newer
+        ></p>
+    </div>
+
+    <div class="col-2">
+      <AdsBar />
+    </div>
   </div>
 </template>
 
 
 <script>
+import PostCard from '../components/PostCard.vue';
 import { AppState } from '../AppState';
 import { computed, ref, onMounted, watch } from 'vue';
 import Pop from '../utils/Pop';
@@ -66,10 +70,10 @@ import AdsBar from '../components/AdsBar.vue';
 import { Post } from '../models/Post';
 
 export default {
-  // props: { type: Post, required: true },
+
   setup() {
     const route = useRoute();
-    let currentPage = 1;
+    // let currentPage = 1;
     const watchableProfileId = computed(() => route.params.profileId)
 
 
@@ -93,14 +97,22 @@ export default {
         Pop.error(error)
       }
     }
-    async function getProfilePostsPages() {
+    async function getProfilePostsPages(pageNumber) {
       try {
         const profileId = route.params.profileId;
-        await postsService.getProfilePostsPages(profileId, currentPage)
+        await postsService.getProfilePostsPages(profileId, pageNumber)
       } catch (error) {
         Pop.error(error)
       }
     }
+    // async function changePage(pageNumber) {
+    //   try {
+    //     await postsService.changePage(`api/posts?page=${pageNumber}`)
+    //   } catch (error) {
+    //     Pop.error(error)
+    //   }
+    // }
+
 
     watch(watchableProfileId, () => {
       logger.log(route);
@@ -113,15 +125,17 @@ export default {
     )
 
     return {
-
+      // changePage,
+      account: computed(() => AppState.account),
       getProfilePostsPages,
+      profilePost: computed(() => AppState.profilePosts),
       posts: computed(() => AppState.profilePosts),
       profile: computed(() => AppState.activeProfile),
       currentPage: computed(() => AppState.currentPage),
       totalPages: computed(() => AppState.totalPages)
     };
   },
-  components: { AccountBar, PostsBar, PostForm, AdsBar }
+  components: { AccountBar, PostsBar, PostForm, AdsBar, PostCard }
 };
 </script>
 
@@ -144,5 +158,9 @@ export default {
   max-width: 100%;
   object-fit: cover;
 
+}
+
+.color:hover {
+  color: #17a2b8
 }
 </style>

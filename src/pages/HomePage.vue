@@ -11,8 +11,8 @@
         <PostForm />
         <PostsBar />
         <div class="d-flex justify-content-between">
-          <p role="button" @click="changePage(currentPage + 1)" :disabled="currentPage == 1" class="color">&lt older</p>
-          <p role="button" @click="changePage(currentPage - 1)" :disabled="currentPage == totalPages" class="color">newer
+          <p role="button" @click="changePage(currentPage + 1)" :disable="currentPage == 1" class="color">&lt older</p>
+          <p role="button" @click="changePage(currentPage - 1)" :disable="currentPage == totalPages" class="color">newer
             ></p>
         </div>
       </div>

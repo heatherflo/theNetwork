@@ -29,13 +29,14 @@ class PostsService {
     AppState.totalPages = response.data.totalPages
   }
 
-  async getProfilePostsPages(profileId, currentPage) {
-    const response = await api.get(`api/profiles/${profileId}/posts?page=${currentPage}`);
-    return {
-      posts: response.data.posts.map(post => new Post(post)),
-      currentPage: response.data.page,
-      totalPages: response.data.totalPages,
-    };
+  async getProfilePostsPages(profileId, pageNumber) {
+    logger.log('changing profile page')
+    const response = await api.get(`api/profiles/${profileId}/posts?page=${pageNumber}`);
+    logger.log('changing page from api', response.data)
+    // AppState.posts: response.data.posts.map(post => new Post(post)),
+    // currentPage: response.data.page,
+    // totalPages: response.data.totalPages,
+
   }
 
 
@@ -45,12 +46,18 @@ class PostsService {
     AppState.posts.splice(indexToRemove, 1)
   }
 
+  async deletePostProfilePage(postId) {
+    const response = await api.delete(`api/posts/${postId}`)
+    const indexToRemove = AppState.posts.findIndex(post => post.id == postId)
+    AppState.posts.splice(indexToRemove, 1)
+  }
+
   async getPostById(profileId) {
     logger.log('are we getting this?')
     const response = await api.get(`api/posts?creatorId=${profileId}`)
     console.log('getting post by id in service ', response.data)
-    const newPosts = response.data.posts.map(post => new Post(post))
-    AppState.profilePosts = newPosts
+    const newProfilePosts = response.data.posts.map(profilePost => new Post(profilePost))
+    AppState.profilePosts = newProfilePosts
   }
 
 

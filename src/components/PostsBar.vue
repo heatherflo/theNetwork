@@ -1,5 +1,7 @@
 <template>
-  <div class="PostsVue card shadow rounded p-2 mt-3" v-for="post in posts" :key="post.id">
+  <div class="PostsBarVue card shadow rounded p-2 mt-3" v-for="post in posts" :key="post.id">
+
+
     <section class="row justify-content-between align-items-center pb-2">
       <div class="col-1">
         <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
@@ -22,7 +24,7 @@
           class=" fs-3 delete mdi mdi-trash-can-outline"></i>
       </div>
     </section>
-    <img class="mt-2 img" :src="post.imgUrl" :alt="post.creator.name">
+    <img v-if="post.imgUrl" class="mt-2 img" :src="post.imgUrl" :alt="post.creator.name">
     <section class="row m-1 justify-content-between align-items-center">
       <p>
         {{ post.body }}
@@ -55,9 +57,9 @@ import { Post } from '../models/Post';
 
 
 export default {
-  // props: {
-  //   post: { type: Post, required: true }
-  // },
+  props: {
+    post: { type: Post, required: true }
+  },
   setup() {
 
 
