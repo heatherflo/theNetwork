@@ -78,7 +78,7 @@ class PostsService {
 
   async likePost(postId) {
     logger.log('liking post from service')
-    const response = await api.post(`api/${postId}/like`)
+    const response = await api.post(`api/posts/${postId}/like`)
     logger.log('is this like working?', response.data)
   }
 
