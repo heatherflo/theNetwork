@@ -20,6 +20,9 @@
     <div class="ms-2" v-if="post.body">
       {{ post.body }}
     </div>
+    <div>
+      <i><i @click="likePost()" class="mdi mdi-heart-outline"></i></i>
+    </div>
 
 
   </div>
@@ -32,12 +35,18 @@ import { computed, ref, onMounted, popScopeId } from 'vue';
 import { Post } from '../models/Post';
 import { postsService } from '../services/PostsService';
 import Pop from '../utils/Pop';
+import { logger } from '../utils/Logger';
 export default {
   props: { post: { type: Post, required: true } },
   setup() {
 
     return {
       account: computed(() => AppState.account),
+
+      async likePost(postId) {
+        await postsService.likePost(postId)
+        logger.log('liking post from page')
+      },
 
       async deletePostProfilePage(postId) {
         try {

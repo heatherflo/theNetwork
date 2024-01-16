@@ -33,9 +33,9 @@ class PostsService {
     logger.log('changing profile page')
     const response = await api.get(`api/profiles/${profileId}/posts?page=${pageNumber}`);
     logger.log('changing page from api', response.data)
-    // AppState.posts: response.data.posts.map(post => new Post(post)),
-    // currentPage: response.data.page,
-    // totalPages: response.data.totalPages,
+    AppState.profilePosts = response.data.posts.map(post => new Post(post))
+    AppState.currentPage = response.data.page
+    AppState.totalPages = response.data.totalPages
 
   }
 
@@ -76,6 +76,11 @@ class PostsService {
     AppState.totalPages = response.data.totalPages
   }
 
+  async likePost(postId) {
+    logger.log('liking post from service')
+    const response = api.get(`api/${postId}/like`)
+    logger.log('is this like working?', response.data)
+  }
 
 }
 
