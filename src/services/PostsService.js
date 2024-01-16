@@ -76,10 +76,13 @@ class PostsService {
     AppState.totalPages = response.data.totalPages
   }
 
-  async likePost(postId) {
+  async likePost(likeIds) {
     logger.log('liking post from service')
-    const response = await api.post(`api/posts/${postId}/like`)
+    const response = await api.post(`api/posts/${likeIds}/like`)
     logger.log('is this like working?', response.data)
+    const newLike = response.data
+    AppState.likeIds = newLike
+    logger.log('appstate likeId', AppState.likeIds)
   }
 
 }

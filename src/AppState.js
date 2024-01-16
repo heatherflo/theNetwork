@@ -20,6 +20,7 @@ export const AppState = reactive({
 
   currentPage: 1,
   totalPages: 1,
-  searchedTerm: ''
+  searchedTerm: '',
 
+  likeIds: []
 })

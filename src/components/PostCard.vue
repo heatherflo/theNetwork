@@ -20,12 +20,11 @@
     <div class="ms-2" v-if="post.body">
       {{ post.body }}
     </div>
-    <div v-if="post.like">
-      <i><i @click="likePost(post.id)" class="mdi mdi-heart"></i></i>
+    <div>
+      <i v-if="!post.likeIds"><i @click="likePost(post.id)" class="mdi mdi-heart-outline"></i></i>
+      <i v-else><i @click="likePost(post.id)" class="mdi mdi-heart"></i></i>
     </div>
-    <div v-else>
-      <i><i @click="likePost(post.id)" class="mdi mdi-heart-outline"></i></i>
-    </div>
+
 
 
   </div>
@@ -44,11 +43,12 @@ export default {
   setup() {
 
     return {
+      likeIds: computed(() => AppState.likeIds),
       account: computed(() => AppState.account),
 
-      async likePost(postId) {
+      async likePost(likeIds) {
         try {
-          await postsService.likePost(postId)
+          await postsService.likePost(likeIds)
           logger.log('liking post from page')
         } catch (error) {
           Pop.error(error)
